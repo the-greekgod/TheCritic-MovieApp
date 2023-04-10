@@ -76,14 +76,14 @@ export default function Signup() {
             value={name}
             onChange={handleChange}
             label="Name"
-            placeholder="John Doe"
+            placeholder="Enter Name"
             name="name"
           />
           <FormInput
             value={email}
             onChange={handleChange}
             label="Email"
-            placeholder="john@email.com"
+            placeholder="Enter Email"
             name="email"
           />
           <FormInput
