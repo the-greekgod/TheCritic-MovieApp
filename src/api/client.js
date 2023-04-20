@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://thecriticback-lecaf.ondigitalocean.app/api",
 });
 
 export default client;
+
