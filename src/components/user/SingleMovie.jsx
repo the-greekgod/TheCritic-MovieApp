@@ -1,4 +1,6 @@
+import { max } from "lodash";
 import React, { useEffect, useState } from "react";
+import { BsFullscreen, BsPause, BsPauseBtn } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getSingleMovie } from "../../api/movie";
 import { useAuth, useNotification } from "../../hooks";
@@ -90,7 +92,7 @@ export default function SingleMovie() {
   return (
     <div className="dark:bg-primary bg-white min-h-screen pb-10">
       <Container className="xl:px-0 px-2">
-        <video poster={poster} controls src={trailer}></video>
+        <video poster={poster} width={"100%"} controls autoPlay src={trailer}></video>
         <div className="flex justify-between">
           <h1 className="xl:text-4xl lg:text-3xl text-2xl  text-highlight dark:text-highlight-dark font-semibold py-3">
             {title}
@@ -127,7 +129,7 @@ export default function SingleMovie() {
             ))}
           </ListWithLabel>
 
-          <ListWithLabel label="Cast:">
+          <ListWithLabel label="Lead Actor:">
             {cast.map(({ id, profile, leadActor }) => {
               return leadActor ? (
                 <CustomButtonLink
@@ -150,7 +152,7 @@ export default function SingleMovie() {
             />
           </ListWithLabel>
 
-          <ListWithLabel label="Cast:">
+          <ListWithLabel label="Genres:">
             {genres.map((g) => (
               <CustomButtonLink label={g} key={g} clickable={false} />
             ))}
@@ -160,7 +162,7 @@ export default function SingleMovie() {
             <CustomButtonLink label={type} clickable={false} />
           </ListWithLabel>
 
-          <CastProfiles cast={cast} />
+          <CastProfiles cast={cast} onProfileClick={handleProfileClick} />
           <RelatedMovies movieId={movieId} />
         </div>
       </Container>
@@ -209,8 +211,7 @@ const CastProfiles = ({ cast, onProfileClick }) => {
                 src={profile.avatar}
                 alt=""
               />
-
-              <CustomButtonLink label={profile.name} />
+              <CustomButtonLink label={profile.name} onClick={() => onProfileClick(profile)} />
               <span className="text-light-subtle dark:text-dark-subtle text-sm">
                 as
               </span>
